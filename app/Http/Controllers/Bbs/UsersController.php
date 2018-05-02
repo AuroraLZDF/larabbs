@@ -38,15 +38,36 @@ class UsersController extends Controller
 
         $data = $request->all();
 
-        if ($request->file('avatar')) {
-            $result = $uploader->save($request->file('avatar'), 'avatars', $user->id, 362, config('app.bbs_url'));
-            if ($result) {
-                $data['avatar'] = $result['path'];
-            }
-        }
-
         $user->update($data);
 
         return redirect()->route('bbs.users.show', $user->id)->with('success', '个人资料更新成功！');
+    }
+
+    /**
+     * 上传图片
+     * @param Request $request
+     * @param ImageUploadHandler $uploader
+     * @return array
+     */
+    public function uploadAvatar(Request $request, ImageUploadHandler $uploader)
+    {
+        // 初始化返回数据，默认是失败的
+        $data = [
+            'code'   => 2,
+            'msg'       => '上传失败!',
+            'file_path' => ''
+        ];
+        // 判断是否有上传文件，并赋值给 $file
+        if ($file = $request->file) {
+            // 保存图片到本地
+            $result = $uploader->save($request->file, 'avatars', $this->auth()->id(), 1024, config('app.bbs_url'));
+            // 图片保存成功的话
+            if ($result) {
+                $data['file_path'] = $result['path'];
+                $data['message'] = "上传成功!";
+                $data['code']   = 1;
+            }
+        }
+        return response()->json($data);
     }
 }

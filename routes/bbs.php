@@ -39,6 +39,7 @@ Route::get('/', 'TopicsController@index')->name('bbs.root');
 Route::get('/users/{user}', 'UsersController@show')->name('bbs.users.show');
 Route::get('/users/{user}/edit', 'UsersController@edit')->name('bbs.users.edit');
 Route::post('/users/{user}', 'UsersController@update')->name('bbs.users.update');
+Route::post('/upload_avatar', 'UsersController@uploadAvatar')->name('bbs.users.upload_avatar');
 
 // 文章
 Route::resource('topics', 'TopicsController', ['only' => ['index', 'create', 'store', 'update', 'edit', 'destroy']])

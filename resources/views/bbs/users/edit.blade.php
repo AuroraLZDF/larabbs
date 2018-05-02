@@ -30,12 +30,31 @@
                     </div>
                     <div class="form-group">
                         <label for="" class="avatar-label">用户头像</label>
-                        <input type="file" name="avatar">
+                        {{--<input type="file" name="avatar">--}}
 
-                        @if($user->avatar)
+                        {{--@if($user->avatar)
                             <br>
                             <img class="thumbnail img-responsive" src="{{ $user->avatar }}" width="200" />
-                        @endif
+                        @endif--}}
+
+                        <!--       -->
+                        <input type="hidden" name="avatar" value="{{ $user->avatar or '' }}">
+                        <div id="uploader" class="wu-example">
+                            <div id="dndArea" class="placeholder">
+                                <div id="filePicker"></div>
+                            </div>
+                            <div class="queueList">
+
+                            </div>
+                            <div class="statusBar" style="display:none;">
+                                <div class="progress">
+                                    <span class="text">0%</span>
+                                    <span class="percentage"></span>
+                                </div>
+                            </div>
+
+
+                        </div>
                     </div>
 
 
@@ -52,3 +71,18 @@
     </div>
 
 @endsection
+@section('styles')
+    <link rel="stylesheet" type="text/css" href="{{ asset('js/webuploader/webuploader.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('js/webuploader/style.css') }}">
+@stop
+@section('scripts')
+    <!-- Web Uploader -->
+    <script src="{{ asset('js/webuploader/webuploader.min.js') }}"></script>
+    <script>
+        var upload_url = '{{ route('bbs.users.upload_avatar') }}',
+            csrf_token = '{{ csrf_token() }}',
+            input_val = $('input[name="avatar"]'),
+            fileNumLimit = 1;
+    </script>
+    <script type="text/javascript" src="{{ asset('js/webuploader/base-setting.js') }}"></script>
+@stop
