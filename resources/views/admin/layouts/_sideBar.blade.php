@@ -14,7 +14,7 @@
                                     <strong class="font-bold">{{ auth('admin')->user()->name }}</strong>
                                 </span>
                                 <script type="text/javascript">
-                                    document.getElementById("logout").onclick = function(){
+                                    document.getElementById("logout").onclick = function () {
                                         document.getElementById('logout-form').submit();
                                     };
                                 </script>
@@ -36,29 +36,29 @@
                 </a>
             </li>
             @if(App\Http\Controllers\Admin\BaseController::permissions(auth('admin')->user(), 'edit_settings'))
-            <li>
-                <a href="#">
-                    <i class="glyphicon glyphicon-th"></i>
-                    <span class="nav-label">后台管理</span>
-                    <span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a class="J_menuItem" href="{{ route('admin.users.index') }}">
-                            <i class="glyphicon glyphicon-user"></i>
-                            <span class="nav-label">管理员管理</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="J_menuItem" href="#">角色管理</a>
-                    </li>
-                    <li>
-                        <a class="J_menuItem" href="#">权限管理</a>
-                    </li>
-                </ul>
-            </li>
+                <li class="@if(currentUri() == 'users') active @endif">
+                    <a href="#">
+                        <i class="glyphicon glyphicon-th"></i>
+                        <span class="nav-label">后台管理</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <li class="@if(currentUri() == 'users') active @endif">
+                            <a class="J_menuItem" href="{{ route('admin.users.index') }}">
+                                <i class="glyphicon glyphicon-user"></i>
+                                <span class="nav-label">管理员管理</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="#">角色管理</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="#">权限管理</a>
+                        </li>
+                    </ul>
+                </li>
             @endif
-            <li>
+            <li class="@if(currentPrefix() == '/bbs') active @endif">
                 <a href="#">
                     <i class="fa fa-bar-chart-o"></i>
                     <span class="nav-label">论坛模块</span>
@@ -66,49 +66,38 @@
                 </a>
                 <ul class="nav nav-second-level">
                     @if(App\Http\Controllers\Admin\BaseController::permissions(auth('admin')->user(), 'manage_users'))
-                    <li>
-                        <a href="#">用户与权限 <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level">
-                            <li>
-                                <a class="J_menuItem" href="{{ route('admin.bbs.users.index') }}">会员管理</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="#">角色管理</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="#">权限管理</a>
-                            </li>
-                        </ul>
-                    </li>
+                        <li class="@if(currentUri() == 'bbs/users') active @endif">
+                            <a class="J_menuItem" href="{{ route('admin.bbs.users.index') }}">会员管理</a>
+                        </li>
                     @endif
                     @if(App\Http\Controllers\Admin\BaseController::permissions(auth('admin')->user(), 'manage_contents'))
-                    <li>
-                        <a href="#">内容管理 <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level">
-                            <li>
-                                <a class="J_menuItem" href="{{ route('admin.bbs.categories.index') }}">分类管理</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="{{ route('admin.bbs.topics.index') }}">话题列表</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="{{ route('admin.bbs.replies.index') }}">回复列表</a>
-                            </li>
-                        </ul>
-                    </li>
+                        <li class="@if(in_array(currentUri(), ['bbs/categories', 'bbs/topics', 'bbs/replies'])) active @endif">
+                            <a href="#">内容管理 <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li class="@if(currentUri() == 'bbs/categories') active @endif">
+                                    <a class="J_menuItem" href="{{ route('admin.bbs.categories.index') }}">分类管理</a>
+                                </li>
+                                <li class="@if(currentUri() == 'bbs/topics') active @endif">
+                                    <a class="J_menuItem" href="{{ route('admin.bbs.topics.index') }}">话题列表</a>
+                                </li>
+                                <li class="@if(currentUri() == 'bbs/replies') active @endif">
+                                    <a class="J_menuItem" href="{{ route('admin.bbs.replies.index') }}">回复列表</a>
+                                </li>
+                            </ul>
+                        </li>
                     @endif
                     @if(App\Http\Controllers\Admin\BaseController::permissions(auth('admin')->user(), 'edit_settings'))
-                    <li>
-                        <a href="#">站点管理 <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level">
-                            <li>
-                                <a class="J_menuItem" href="{{ route('admin.bbs.site') }}">全局设着</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="{{ route('admin.bbs.links.index') }}">外链管理</a>
-                            </li>
-                        </ul>
-                    </li>
+                        <li class="@if(in_array(currentUri(), ['bbs/site', 'bbs/links'])) active @endif">
+                            <a href="#">站点管理 <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li class="@if(currentUri() == 'bbs/site') active @endif">
+                                    <a class="J_menuItem" href="{{ route('admin.bbs.site') }}">全局设着</a>
+                                </li>
+                                <li class="@if(currentUri() == 'bbs/links') active @endif">
+                                    <a class="J_menuItem" href="{{ route('admin.bbs.links.index') }}">外链管理</a>
+                                </li>
+                            </ul>
+                        </li>
                     @endif
                 </ul>
             </li>

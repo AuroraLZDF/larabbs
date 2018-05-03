@@ -1,9 +1,5 @@
 <?php
 
-use Illuminate\Contracts\Support\MessageProvider;
-use Illuminate\Support\MessageBag;
-use Illuminate\Support\ViewErrorBag;
-
 if (!function_exists('log_message')) {
     /**
      * 记录日志到执行文件中
@@ -137,8 +133,7 @@ function model_plural_name($model)
     return str_plural($snake_case_name);
 }
 
-if (!function_exists('setting'))
-{
+if (!function_exists('setting')) {
     function setting($key, $default = '', $setting_name = 'site')
     {
         if (!config()->get($setting_name)) {
@@ -150,5 +145,27 @@ if (!function_exists('setting'))
 
         // Access a setting, supplying a default value
         return config()->get($setting_name . '.' . $key, $default);
+    }
+}
+
+if (!function_exists('currentUri')) {
+    /**
+     * 获取当前路由 uri
+     * @return string
+     */
+    function currentUri()
+    {
+        return Route::current()->uri();
+    }
+}
+
+if (!function_exists('currentPrefix')) {
+    /**
+     * 获取当前路由 prefix
+     * @return mixed
+     */
+    function currentPrefix()
+    {
+        return Route::current()->action['prefix'];
     }
 }
