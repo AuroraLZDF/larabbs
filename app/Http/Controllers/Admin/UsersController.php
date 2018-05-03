@@ -28,11 +28,6 @@ class UsersController extends Controller
         return $this->returnJson(1, route('admin.users.index'), '成功添加管理员！');
     }
 
-    /**
-     * @param User $user
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @internal param $id
-     */
     public function edit(User $user)
     {
         if (empty($user)) {

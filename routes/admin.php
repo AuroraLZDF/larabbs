@@ -45,6 +45,26 @@ Route::group(['middleware' => ['auth.admin']], function () {
             'destroy' => 'admin.users.destroy'
         ]);
 
+    Route::resource('permissions', 'PermissionsController', ['only' => ['index', 'update', 'edit', 'create', 'store'/*, 'destroy'*/]])
+    ->names([
+        'index' => 'admin.permissions.index',
+        'create' => 'admin.permissions.create',
+        'store' => 'admin.permissions.store',
+        'edit' => 'admin.permissions.edit',
+        'update' => 'admin.permissions.update',
+        //'destroy' => 'admin.permissions.destroy'
+    ]);
+
+    Route::resource('roles', 'RolesController', ['only' => ['index', 'update', 'edit', 'create', 'store'/*, 'destroy'*/]])
+        ->names([
+            'index' => 'admin.roles.index',
+            'create' => 'admin.roles.create',
+            'store' => 'admin.roles.store',
+            'edit' => 'admin.roles.edit',
+            'update' => 'admin.roles.update',
+            //'destroy' => 'admin.roles.destroy'
+        ]);
+
 
     // BBS
     Route::group(['prefix' => 'bbs', 'namespace' => 'Bbs'], function () {

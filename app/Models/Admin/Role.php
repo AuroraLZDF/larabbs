@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models\Bbs;
+namespace App\Models\Admin;
 
-use \Spatie\Permission\Models\Permission as PermissionModel;
+use \Spatie\Permission\Models\Role as PermissionRole;
 
-class Permission extends PermissionModel
+class Role extends PermissionRole
 {
     protected $connection = 'www';
 

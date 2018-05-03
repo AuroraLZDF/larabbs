@@ -29,14 +29,14 @@
                 <span class="ng-scope">分类</span>
             </li>
 
-            <li>
+            <li class="active">
                 <a class="J_menuItem" href="{{ route('admin.root') }}">
                     <i class="fa fa-home"></i>
                     <span class="nav-label">主页</span>
                 </a>
             </li>
             @if(permissions(auth('admin')->user(), 'edit_settings'))
-                <li class="@if(currentUri() == 'users') active @endif">
+                <li class="@if(in_array(currentUri(), ['users', 'roles', 'permissions'])) active @endif">
                     <a href="#">
                         <i class="glyphicon glyphicon-th"></i>
                         <span class="nav-label">后台管理</span>
@@ -49,11 +49,11 @@
                                 <span class="nav-label">管理员管理</span>
                             </a>
                         </li>
-                        <li>
-                            <a class="J_menuItem" href="#">角色管理</a>
+                        <li class="@if(currentUri() == 'roles') active @endif">
+                            <a class="J_menuItem" href="{{ route('admin.roles.index') }}">角色管理</a>
                         </li>
-                        <li>
-                            <a class="J_menuItem" href="#">权限管理</a>
+                        <li class="@if(currentUri() == 'permissions') active @endif">
+                            <a class="J_menuItem" href="{{ route('admin.permissions.index') }}">权限管理</a>
                         </li>
                     </ul>
                 </li>
