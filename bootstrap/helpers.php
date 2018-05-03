@@ -169,3 +169,16 @@ if (!function_exists('currentPrefix')) {
         return Route::current()->action['prefix'];
     }
 }
+
+if (!function_exists('permissions')) {
+    /**
+     * 管理员权限判断
+     * @param \App\Models\Admin\User $user
+     * @param string $power
+     * @return bool
+     */
+    function permissions (App\Models\Admin\User $user, string $power)
+    {
+        return App\Http\Controllers\Admin\BaseController::permissions($user, $power);
+    }
+}

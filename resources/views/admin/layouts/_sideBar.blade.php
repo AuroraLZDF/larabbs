@@ -35,7 +35,7 @@
                     <span class="nav-label">主页</span>
                 </a>
             </li>
-            @if(App\Http\Controllers\Admin\BaseController::permissions(auth('admin')->user(), 'edit_settings'))
+            @if(permissions(auth('admin')->user(), 'edit_settings'))
                 <li class="@if(currentUri() == 'users') active @endif">
                     <a href="#">
                         <i class="glyphicon glyphicon-th"></i>
@@ -65,12 +65,12 @@
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
-                    @if(App\Http\Controllers\Admin\BaseController::permissions(auth('admin')->user(), 'manage_users'))
+                    @if(permissions(auth('admin')->user(), 'manage_users'))
                         <li class="@if(currentUri() == 'bbs/users') active @endif">
                             <a class="J_menuItem" href="{{ route('admin.bbs.users.index') }}">会员管理</a>
                         </li>
                     @endif
-                    @if(App\Http\Controllers\Admin\BaseController::permissions(auth('admin')->user(), 'manage_contents'))
+                    @if(permissions(auth('admin')->user(), 'manage_contents'))
                         <li class="@if(in_array(currentUri(), ['bbs/categories', 'bbs/topics', 'bbs/replies'])) active @endif">
                             <a href="#">内容管理 <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
@@ -86,7 +86,7 @@
                             </ul>
                         </li>
                     @endif
-                    @if(App\Http\Controllers\Admin\BaseController::permissions(auth('admin')->user(), 'edit_settings'))
+                    @if(permissions(auth('admin')->user(), 'edit_settings'))
                         <li class="@if(in_array(currentUri(), ['bbs/site', 'bbs/links'])) active @endif">
                             <a href="#">站点管理 <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
