@@ -8,6 +8,7 @@
         "php": ">=7.0.0",
         "auroralzdf/sudo-su": "~1.1.1",
         "dingo/api": "2.0.0-alpha1",
+        "doctrine/dbal": "^2.7",
         "fideloper/proxy": "~3.3",
         "guzzlehttp/guzzle": "~6.3",
         "hieu-le/active": "~3.5",

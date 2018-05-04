@@ -21,17 +21,7 @@ $api = app('Dingo\Api\Routing\Router');
 
 
 // BBS API
-$api->group(['domain' => domain(config('app.bbs_url')), 'version' => 'v1'], function ($api) {
-
-    $api->version('v1', function($api) {
-        $api->get('version', function() {
-            return response('this is version v1');
-        });
-    });
-
-    $api->version('v2', function($api) {
-        $api->get('version', function() {
-            return response('this is version v2');
-        });
-    });
+$api->group(['domain' => domain(config('app.bbs_url')), 'namespace' => 'App\Http\Controllers\Api', 'version' => 'v1'], function ($api) {
+    // 短信验证码
+    $api->post('verificationCodes', 'VerificationCodesController@store')->name('api.verificationCodes.store');
 });
