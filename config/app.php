@@ -170,6 +170,8 @@ return [
         /*
          * Package Service Providers...
          */
+        // 短信发送接口
+        App\Providers\EasySmsServiceProvider::class,
 
         /*
          * Application Service Providers...
