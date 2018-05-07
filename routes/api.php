@@ -35,5 +35,8 @@ $api->group(['domain' => domain(config('app.bbs_url')), 'namespace' => 'App\Http
         // 图片验证码
         $api->post('captchas', 'CaptchasController@store')
             ->name('api.captchas.store');
+        // 第三方登录
+        $api->post('socials/{social_type}/authorizations', 'AuthorizationsController@socialStore')
+            ->name('api.socials.authorizations.store');
     });
 });
