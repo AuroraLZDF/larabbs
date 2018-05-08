@@ -15,4 +15,4 @@
  * 根
  */
 Route::get('/', 'HomeController@index');
-// test
+
