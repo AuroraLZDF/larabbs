@@ -29,7 +29,8 @@
         "simplesoftwareio/simple-qrcode": "^2.0",
         "socialiteproviders/weixin": "^4.0",
         "spatie/laravel-permission": "~2.7",
-        "torann/geoip": "^1.0"
+        "torann/geoip": "^1.0",
+        "tymon/jwt-auth": "1.0.0-rc.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",

@@ -53,8 +53,9 @@ return [
 
 
         'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
+            //'driver' => 'token',
+            'driver' => 'jwt',
+            'provider' => 'bbs_users',
         ]
     ],
 

@@ -6,8 +6,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use DB;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends  Authenticatable
+class User extends  Authenticatable implements JWTSubject
 {
     // 非继承自 Bbs Model
     protected $connection = 'bbs';
@@ -118,5 +119,15 @@ class User extends  Authenticatable
         }
 
         return $model->paginate($limit, ['*'], 'page', $page);
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }
