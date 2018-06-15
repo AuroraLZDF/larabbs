@@ -70,4 +70,11 @@ class UsersController extends Controller
         }
         return response()->json($data);
     }
+
+    public function usersJson(Request $request)
+    {
+        $name = $request->q;
+        $users  =User::where('name','like',$name."%")->pluck('name')->toArray();
+        return response()->json($users);
+    }
 }

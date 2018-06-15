@@ -77,3 +77,6 @@ Route::resource('notifications', 'NotificationsController', ['only' => ['index']
 
 // 后台禁止访问权限控制
 Route::get('permission-denied', 'PagesController@permissionDenied')->name('bbs.permission-denied');
+
+//
+Route::get('usersJson','UsersController@usersJson')->name('bbs.users_json');
