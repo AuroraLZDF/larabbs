@@ -80,3 +80,6 @@ Route::get('permission-denied', 'PagesController@permissionDenied')->name('bbs.p
 
 //
 Route::get('usersJson','UsersController@usersJson')->name('bbs.users_json');
+
+// common error
+Route::get('/error', 'PagesController@error')->name('bbs.error');

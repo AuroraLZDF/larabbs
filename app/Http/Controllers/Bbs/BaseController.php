@@ -65,8 +65,8 @@ class BaseController extends Controller
 
     public function show_message()
     {
-        abort('404', '无权访问！');
-        //TODO...跳转
+        //abort('403', '无权访问！');
+        web_header(route('bbs.error'));
     }
 
     /**

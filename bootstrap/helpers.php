@@ -177,8 +177,25 @@ if (!function_exists('permissions')) {
      * @param string $power
      * @return bool
      */
-    function permissions (App\Models\Admin\User $user, string $power)
+    function permissions(App\Models\Admin\User $user, string $power)
     {
         return App\Http\Controllers\Admin\BaseController::permissions($user, $power);
+    }
+}
+
+if (!function_exists('pass_days')) {
+    /**
+     * 获取几天前的时间
+     * @param $pass_day
+     * @return false|string
+     */
+    function pass_days($pass_day)
+    {
+        $time = time();
+        if ($pass_day && is_int($pass_day)) {
+            $time = strtotime("-$pass_day day");
+        }
+
+        return date('Y-m-d H:i:s', $time);
     }
 }
