@@ -76,3 +76,24 @@
         </div>
     </div>
 @stop
+@section('styles')
+    <link href="{{ asset('js/atwho/jquery.atwho.min.css') }}" rel="stylesheet">
+@stop
+@section('scripts')
+    <script src="{{ asset('js/atwho/jquery.caret.min.js') }}"></script>
+    <script src="{{ asset('js/atwho/jquery.atwho.js') }}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#inputor').atwho({
+                at: "@",
+                callbacks: {
+                    remoteFilter: function(query, callback) {
+                        $.getJSON("{{ route('bbs.users_json') }}", {q: query}, function(data) {
+                            callback(data)
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+@stop

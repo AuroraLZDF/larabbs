@@ -21,4 +21,9 @@ class PagesController extends Controller
         // 否则使用视图
         return view('bbs.pages.permission_denied');
     }
+
+    public function error()
+    {
+        return view('bbs.errors.403', ['error' => '无权访问！']);
+    }
 }

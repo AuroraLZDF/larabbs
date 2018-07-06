@@ -13,11 +13,6 @@ class UsersController extends Controller
     public function __construct()
     {
         $this->middleware('auth.bbs', ['except' => ['show']]);
-
-        /*$ac = $this->action();
-
-        $ac = in_array($ac, ['show', 'edit', 'update']) ? $ac : 'error';
-        call_user_func([$this, $ac], func_get_args());*/
     }
 
     public function show(User $user)
@@ -28,7 +23,7 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         $this->authRedirect($user);
-        
+
         return view('bbs.users.edit', compact('user'));
     }
 
@@ -53,8 +48,8 @@ class UsersController extends Controller
     {
         // 初始化返回数据，默认是失败的
         $data = [
-            'code'   => 2,
-            'msg'       => '上传失败!',
+            'code' => 2,
+            'msg' => '上传失败!',
             'file_path' => ''
         ];
         // 判断是否有上传文件，并赋值给 $file
@@ -65,9 +60,16 @@ class UsersController extends Controller
             if ($result) {
                 $data['file_path'] = $result['path'];
                 $data['message'] = "上传成功!";
-                $data['code']   = 1;
+                $data['code'] = 1;
             }
         }
         return response()->json($data);
+    }
+
+    public function usersJson(Request $request)
+    {
+        $name = $request->q;
+        $users = User::where('name', 'like', $name . "%")->pluck('name')->toArray();
+        return response()->json($users);
     }
 }

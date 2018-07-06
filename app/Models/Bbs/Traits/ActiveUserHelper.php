@@ -20,7 +20,7 @@ trait ActiveUserHelper
     protected $user_number = 6; // 取出来多少用户
 
     // 缓存相关配置
-    protected $cache_key = 'larabbs_active_users';
+    protected $cache_key = 'aurbbs_active_users';
     protected $cache_expire_in_minutes = 65;
 
     public function getActiveUsers()
@@ -45,16 +45,11 @@ trait ActiveUserHelper
         $this->calculateTopicScore();
         $this->calculateReplyScore();
 
-        // 数组按照得分排序
-        $users = array_sort($this->users, function ($user) {
-            return $user['score'];
-        });
+        // 数组按照得分由高到低排序，保持索引不变
+        arsort($this->users);  // arsort 对数组的值由高到低排序，并保持索引关系
 
-        // 我们需要的是倒序，高分靠前，第二个参数为保持数组的 KEY 不变
-        $users = array_reverse($users, true);
-
-        // 只获取我们想要的数量
-        $users = array_slice($users, 0, $this->user_number, true);
+        // 只获取我们想要的数量,保持索引不变
+        $users = array_slice($this->users, 0, $this->user_number, true);
 
         // 新建一个空集合
         $active_users = collect();
@@ -65,7 +60,6 @@ trait ActiveUserHelper
 
             // 如果数据库里有该用户的话
             if ($user) {
-
                 // 将此用户实体放入集合的末尾
                 $active_users->push($user);
             }
@@ -80,7 +74,8 @@ trait ActiveUserHelper
         // 从话题数据表里取出限定时间范围（$pass_days）内，有发表过话题的用户
         // 并且同时取出用户此段时间内发布话题的数量
         $topic_users = Topic::query()->select(DB::raw('user_id, count(*) as topic_count'))
-            ->where('created_at', '>=', Carbon::now()->subDays($this->pass_days))
+            //->where('created_at', '>=', Carbon::now()->subDays($this->pass_days))
+            ->where('created_at', '>=', pass_days($this->pass_days))
             ->groupBy('user_id')
             ->get();
         // 根据话题数量计算得分
@@ -94,7 +89,8 @@ trait ActiveUserHelper
         // 从回复数据表里取出限定时间范围（$pass_days）内，有发表过回复的用户
         // 并且同时取出用户此段时间内发布回复的数量
         $reply_users = Reply::query()->select(DB::raw('user_id, count(*) as reply_count'))
-            ->where('created_at', '>=', Carbon::now()->subDays($this->pass_days))
+            //->where('created_at', '>=', Carbon::now()->subDays($this->pass_days))
+            ->where('created_at', '>=', pass_days($this->pass_days))
             ->groupBy('user_id')
             ->get();
         // 根据回复数量计算得分
@@ -112,5 +108,15 @@ trait ActiveUserHelper
     {
         // 将数据放入缓存中
         Cache::put($this->cache_key, $active_users, $this->cache_expire_in_minutes);
+    }
+
+    /**
+     * 清空活跃用户缓存
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
+    public function deleteActiveUsersCache()
+    {
+        // 清空指定活跃用户缓存
+        Cache::delete($this->cache_key);
     }
 }
