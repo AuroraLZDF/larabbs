@@ -9,4 +9,9 @@ use App\Http\Controllers\Controller as BaseController;
 class Controller extends BaseController
 {
     use Helpers;
+
+    public static function auth()
+    {
+        return auth('api');
+    }
 }

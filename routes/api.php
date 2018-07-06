@@ -22,7 +22,18 @@ $api = app('Dingo\Api\Routing\Router');
 
 // BBS API
 $api->group(['domain' => domain(config('app.bbs_url')), 'namespace' => 'App\Http\Controllers\Api', 'version' => 'v1'], function ($api) {
+    // auth
     $api->group([
+        'middleware' => 'api',
+        //'prefix' => 'auth'
+    ], function ($api) {
+        $api->post('login', 'AuthController@login');
+        $api->post('logout', 'AuthController@logout');
+        $api->post('refresh', 'AuthController@refresh');
+        $api->post('me', 'AuthController@me');
+    });
+
+    /*$api->group([
         'middleware' => 'api.throttle',
         'limit' => config('api.rate_limits.sign.limit'),
         'expires' => config('api.rate_limits.sign.expires'),
@@ -47,5 +58,5 @@ $api->group(['domain' => domain(config('app.bbs_url')), 'namespace' => 'App\Http
         // 删除token
         $api->delete('authorizations/current', 'AuthorizationsController@destroy')
             ->name('api.authorizations.destroy');
-    });
+    });*/
 });
