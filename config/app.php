@@ -53,6 +53,9 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+    'www_url' => env('WWW_URL', 'http://localhost'),
+    'bbs_url' => env('BBS_URL', 'http://localhost'),
+    'admin_url' => env('ADMIN_URL', 'http://localhost'),
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +68,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Shanghai',
 
     /*
     |--------------------------------------------------------------------------
@@ -167,7 +170,8 @@ return [
         /*
          * Package Service Providers...
          */
-
+        // 短信发送接口
+        App\Providers\EasySmsServiceProvider::class,
         /*
          * Application Service Providers...
          */

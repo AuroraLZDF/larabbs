@@ -33,7 +33,7 @@ return [
 
     'connections' => [
 
-        'sqlite' => [
+        /*'sqlite' => [
             'driver' => 'sqlite',
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
             'prefix' => '',
@@ -76,6 +76,49 @@ return [
             'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',
             'prefix' => '',
+        ],*/
+
+        'www' => [
+            'driver' => 'mysql',
+            'host' => env('WWW_DB_HOST', '127.0.0.1'),
+            'port' => env('WWW_DB_PORT', '3306'),
+            'database' => env('WWW_DB_DATABASE', 'forge'),
+            'username' => env('WWW_DB_USERNAME', 'forge'),
+            'password' => env('WWW_DB_PASSWORD', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
+        'bbs' => [
+            'driver' => 'mysql',
+            'host' => env('BBS_DB_HOST', '127.0.0.1'),
+            'port' => env('BBS_DB_PORT', '3306'),
+            'database' => env('BBS_DB_DATABASE', 'forge'),
+            'username' => env('BBS_DB_USERNAME', 'forge'),
+            'password' => env('BBS_DB_PASSWORD', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => 'bbs_',
+            'strict' => true,
+            'engine' => null,
+        ],
+        'admin' => [
+            'driver' => 'mysql',
+            'host' => env('ADMIN_DB_HOST', '127.0.0.1'),
+            'port' => env('ADMIN_DB_PORT', '3306'),
+            'database' => env('ADMIN_DB_DATABASE', 'forge'),
+            'username' => env('ADMIN_DB_USERNAME', 'forge'),
+            'password' => env('ADMIN_DB_PASSWORD', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => 'admin_',
+            'strict' => true,
+            'engine' => null,
         ],
 
     ],

@@ -15,6 +15,10 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected $namespace = 'App\Http\Controllers';
+    protected $namespace_www = 'App\Http\Controllers\Www';
+    protected $namespace_bbs = 'App\Http\Controllers\Bbs';
+    protected $namespace_admin = 'App\Http\Controllers\Admin';
+    protected $namespace_api = 'App\Http\Controllers\Api';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -39,7 +43,9 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
-        //
+        $this->mapBbsRoutes();
+
+        $this->mapAdminRoutes();
     }
 
     /**
@@ -52,8 +58,9 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapWebRoutes()
     {
         Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/web.php'));
+            ->domain(domain(config('app.url')))
+            ->namespace($this->namespace_www)
+            ->group(base_path('routes/web.php'));
     }
 
     /**
@@ -66,8 +73,30 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         Route::prefix('api')
-             ->middleware('api')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/api.php'));
+            ->middleware('api')
+            //->namespace($this->namespace_api)
+            ->group(base_path('routes/api.php'));
+    }
+
+    /**
+     * 论坛
+     */
+    protected function mapBbsRoutes()
+    {
+        Route::middleware('web')
+            ->domain(domain(config('app.bbs_url')))
+            ->namespace($this->namespace_bbs)
+            ->group(base_path('routes/bbs.php'));
+    }
+
+    /**
+     * 后台
+     */
+    protected function mapAdminRoutes()
+    {
+        Route::middleware('web')
+            ->domain(domain(config('app.admin_url')))
+            ->namespace($this->namespace_admin)
+            ->group(base_path('routes/admin.php'));
     }
 }

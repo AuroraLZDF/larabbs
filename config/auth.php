@@ -41,12 +41,22 @@ return [
             'provider' => 'users',
         ],
 
+        'bbs' => [
+            'driver' => 'session',
+            'provider' => 'bbs_users',
+        ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admin_users',
+        ],
+
+
         'api' => [
             'driver' => 'token',
-            'provider' => 'users',
-        ],
+            'provider' => 'bbs_users',
+        ]
     ],
-
     /*
     |--------------------------------------------------------------------------
     | User Providers
@@ -67,13 +77,18 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Models\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'bbs_users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Bbs\User::class,
+        ],
+
+        'admin_users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin\User::class,
+        ]
     ],
 
     /*

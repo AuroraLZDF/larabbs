@@ -11,5 +11,9 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+mix.js('resources/assets/js/app.js', 'public/js/bbs')
+    .sass('resources/assets/sass/app.scss', 'public/css/bbs')
+    //.copyDirectory('resources/assets/editor-md', 'public/js/editor-md/')
+    .copyDirectory('resources/assets/simditor/js', 'public/js/simditor/')
+    .copyDirectory('resources/assets/simditor/css', 'public/css/simditor/')
+;
