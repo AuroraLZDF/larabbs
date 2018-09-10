@@ -32,7 +32,6 @@ return [
     */
 
     'connections' => [
-
         /*'sqlite' => [
             'driver' => 'sqlite',
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
@@ -77,7 +76,6 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
         ],*/
-
         'www' => [
             'driver' => 'mysql',
             'host' => env('WWW_DB_HOST', '127.0.0.1'),
