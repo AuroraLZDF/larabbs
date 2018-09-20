@@ -32,6 +32,9 @@ class SyncUserActivedAt extends Command
     public function __construct()
     {
         parent::__construct();
+         //TODO: 添加定时任务,每天凌晨 1 点执行一次
+        // crontab -e
+        // 0 1 * * * php /www/code/aurora/artisan larabbs:sync-user-actived-at >> /dev/null 2>&1
     }
 
     /**

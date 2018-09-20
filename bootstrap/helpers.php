@@ -199,3 +199,18 @@ if (!function_exists('pass_days')) {
         return date('Y-m-d H:i:s', $time);
     }
 }
+
+if (!function_exists('dda')) {
+    /**
+     * dd() -> dda()
+     * @param $model
+     */
+    function dda($model)
+    {
+        if (method_exists($model, 'toArray')) {
+            dd($model->toArray());
+        } else {
+            dd($model);
+        }
+    }
+}

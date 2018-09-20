@@ -29,9 +29,9 @@ class CalculateActiveUser extends Command
     public function __construct()
     {
         parent::__construct();
-        //TODO: 添加定时任务
+        //TODO: 添加定时任务,每小时执行一次
         // crontab -e
-        // * * * * * php /home/vagrant/Code/larabbs/artisan schedule:run >> /dev/null 2>&1
+        // * */1 * * * php /www/code/aurora/artisan larabbs:calculate-active-user >> /dev/null 2>&1
     }
 
     /**
